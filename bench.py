@@ -33,7 +33,7 @@ from pathlib import Path
 
 from src import manifest
 from src.data import DATASET_ID
-from src.eval_llm import DECODE, MAX_NEW_TOKENS, MODEL_ID
+from src.eval_llm import DECODE, MAX_NEW_TOKENS, MODEL_ID, dtype_kwargs
 from src.sft_data import build_messages, words_of
 
 ARTIFACTS = Path(__file__).parent / "artifacts"
@@ -84,7 +84,7 @@ def bench_hf(name: str, documents, adapter: str | None, load_in_4bit: bool) -> d
     _free()
     started = time.time()
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-    kwargs: dict = {"dtype": torch.bfloat16, "device_map": "auto"}
+    kwargs: dict = {**dtype_kwargs(torch.bfloat16), "device_map": "auto"}
     if load_in_4bit:
         from transformers import BitsAndBytesConfig
 

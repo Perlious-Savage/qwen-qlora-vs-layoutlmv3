@@ -17,13 +17,14 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import dataclasses
 import json
 import time
 from pathlib import Path
 
 from . import manifest
 from .data import DATASET_ID
-from .eval_llm import MODEL_ID, evaluate, hf_generate_fn
+from .eval_llm import MODEL_ID, dtype_kwargs, evaluate, hf_generate_fn
 from .sft_data import build_sft_dataset
 
 ARTIFACTS = Path(__file__).resolve().parent.parent / "artifacts"
@@ -126,8 +127,8 @@ def run_training(args: Config) -> dict:
     model = AutoModelForCausalLM.from_pretrained(
         args.model,
         quantization_config=quantization,
-        dtype=torch.bfloat16,
         device_map="auto",
+        **dtype_kwargs(torch.bfloat16),
     )
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     model.config.use_cache = False
@@ -155,8 +156,14 @@ def run_training(args: Config) -> dict:
         logging_steps=10,
         save_strategy="no",
         seed=args.seed,
-        max_length=args.max_length,
         report_to=[],
+        # TRL renamed SFTConfig.max_seq_length to max_length. Colab's pinned version
+        # moves around, so pick whichever this install declares.
+        **{
+            "max_length"
+            if "max_length" in {f.name for f in dataclasses.fields(SFTConfig)}
+            else "max_seq_length": args.max_length
+        },
     )
 
     trainer = SFTTrainer(

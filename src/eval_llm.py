@@ -192,7 +192,7 @@ def hf_backend(adapter: str | None = None, load_in_4bit: bool = False):
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
-    kwargs: dict = {"dtype": torch.bfloat16, "device_map": "auto"}
+    kwargs: dict = {**dtype_kwargs(torch.bfloat16), "device_map": "auto"}
     if load_in_4bit:
         from transformers import BitsAndBytesConfig
 
