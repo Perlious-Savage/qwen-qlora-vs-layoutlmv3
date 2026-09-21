@@ -153,40 +153,56 @@ def _digest(text: str) -> str:
 # --- backends -----------------------------------------------------------------------
 
 
-def hf_generate_fn(model, tokenizer):
-    """Greedy generation over already-loaded weights.
+def hf_generate_fn(model, tokenizer, batch_size: int = 8):
+    """Greedy generation over already-loaded weights, batched.
 
     Separate from `hf_backend` so a training run can evaluate the model it still has in
     memory rather than reloading 7B parameters from disk to score them.
+
+    Batching is the difference between scoring the test split in five minutes and in
+    twenty-five. It changes nothing about the result: decoding is greedy, so each
+    sequence is produced independently of what it is batched with. Padding is on the
+    left, because generation continues from the last position and a right-padded prompt
+    would have the model continue from padding instead of from the receipt.
+
+    `bench.py` deliberately does not use this - latency has to be measured at batch 1,
+    which is how a single caller experiences it.
     """
     import torch
 
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "left"
+
     def generate(prompts: list[list[dict]]) -> list[tuple[str, bool]]:
         results = []
-        for index, messages in enumerate(prompts, 1):
-            text = tokenizer.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
-            inputs = tokenizer(text, return_tensors="pt").to(model.device)
+        for start in range(0, len(prompts), batch_size):
+            chunk = prompts[start : start + batch_size]
+            texts = [
+                tokenizer.apply_chat_template(m, tokenize=False, add_generation_prompt=True)
+                for m in chunk
+            ]
+            inputs = tokenizer(texts, return_tensors="pt", padding=True).to(model.device)
             with torch.no_grad():
                 output = model.generate(
-                    **inputs, pad_token_id=tokenizer.eos_token_id, **DECODE
+                    **inputs, pad_token_id=tokenizer.pad_token_id, **DECODE
                 )
-            new_tokens = output[0][inputs["input_ids"].shape[1] :]
-            results.append(
-                (
-                    tokenizer.decode(new_tokens, skip_special_tokens=True),
-                    len(new_tokens) >= MAX_NEW_TOKENS,
+            for row in output[:, inputs["input_ids"].shape[1] :]:
+                # A row that never emitted a stop token used the whole budget: truncated.
+                generated = int((row != tokenizer.pad_token_id).sum())
+                results.append(
+                    (
+                        tokenizer.decode(row, skip_special_tokens=True),
+                        generated >= MAX_NEW_TOKENS,
+                    )
                 )
-            )
-            if index % 10 == 0:
-                print(f"  {index}/{len(prompts)}")
+            print(f"  {min(start + batch_size, len(prompts))}/{len(prompts)}")
         return results
 
     return generate
 
 
-def hf_backend(adapter: str | None = None, load_in_4bit: bool = False):
+def hf_backend(adapter: str | None = None, load_in_4bit: bool = False, batch_size: int = 8):
     """Transformers generation. Used for correctness; `bench.py` measures speed."""
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -209,7 +225,7 @@ def hf_backend(adapter: str | None = None, load_in_4bit: bool = False):
 
         model = PeftModel.from_pretrained(model, adapter)
     model.eval()
-    return hf_generate_fn(model, tokenizer)
+    return hf_generate_fn(model, tokenizer, batch_size)
 
 
 def vllm_backend(adapter: str | None = None, quantization: str | None = None):
@@ -284,6 +300,7 @@ def main() -> None:
     parser.add_argument("--quantization", default=None, help="vLLM quantization, e.g. bitsandbytes")
     parser.add_argument("--fewshot", type=int, default=0, help="exemplars, from train only")
     parser.add_argument("--limit", type=int, default=0, help="0 = the whole test split")
+    parser.add_argument("--batch-size", type=int, default=8, help="generation batch; lower it on OOM")
     parser.add_argument("--lengths", action="store_true", help="measure gold lengths and stop")
     args = parser.parse_args()
 
@@ -306,7 +323,7 @@ def main() -> None:
     generate = (
         vllm_backend(args.adapter, args.quantization)
         if args.backend == "vllm"
-        else hf_backend(args.adapter, args.load_in_4bit)
+        else hf_backend(args.adapter, args.load_in_4bit, args.batch_size)
     )
     evaluate(test, generate, args.config, fewshot)
 

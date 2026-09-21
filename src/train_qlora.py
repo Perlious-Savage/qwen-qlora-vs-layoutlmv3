@@ -211,7 +211,7 @@ def run_training(args: Config) -> dict:
             trainer.model.eval()
             scores = evaluate(
                 validation,
-                hf_generate_fn(trainer.model, tokenizer),
+                hf_generate_fn(trainer.model, tokenizer, batch_size=4),
                 config=args.run_name or "qlora-validation",
             )
             metrics.update(
