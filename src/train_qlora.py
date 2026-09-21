@@ -142,29 +142,40 @@ def run_training(args: Config) -> dict:
         task_type="CAUSAL_LM",
     )
 
-    training_args = SFTConfig(
-        output_dir=args.output,
-        num_train_epochs=args.epochs,
-        learning_rate=args.lr,
-        per_device_train_batch_size=args.batch_size,
-        gradient_accumulation_steps=args.grad_accum,
-        gradient_checkpointing=True,
-        bf16=True,
-        optim="paged_adamw_8bit",
-        lr_scheduler_type="cosine",
-        warmup_ratio=0.03,
-        logging_steps=10,
-        save_strategy="no",
-        seed=args.seed,
-        report_to=[],
-        # TRL renamed SFTConfig.max_seq_length to max_length. Colab's pinned version
-        # moves around, so pick whichever this install declares.
-        **{
-            "max_length"
-            if "max_length" in {f.name for f in dataclasses.fields(SFTConfig)}
-            else "max_seq_length": args.max_length
-        },
-    )
+    # SFTConfig's field set moves between TRL releases - max_seq_length became
+    # max_length, and some builds do not declare TrainingArguments fields like
+    # warmup_ratio at all. Passing one it does not know is a TypeError after the 15GB
+    # model has already downloaded, so the set is filtered against what this install
+    # actually declares. Anything dropped is printed and recorded in the artifact: a
+    # training hyperparameter that silently stopped applying would otherwise be an
+    # unexplained difference between two runs.
+    wanted = {
+        "output_dir": args.output,
+        "num_train_epochs": args.epochs,
+        "learning_rate": args.lr,
+        "per_device_train_batch_size": args.batch_size,
+        "gradient_accumulation_steps": args.grad_accum,
+        "gradient_checkpointing": True,
+        "bf16": True,
+        "optim": "paged_adamw_8bit",
+        "lr_scheduler_type": "cosine",
+        "warmup_ratio": 0.03,
+        "logging_steps": 10,
+        "save_strategy": "no",
+        "seed": args.seed,
+        "report_to": [],
+        "max_length": args.max_length,
+    }
+    declared = {field.name for field in dataclasses.fields(SFTConfig)}
+    if "max_length" not in declared and "max_seq_length" in declared:
+        wanted["max_seq_length"] = wanted.pop("max_length")
+
+    dropped = sorted(set(wanted) - declared)
+    if dropped:
+        import trl
+
+        print(f"SFTConfig in TRL {trl.__version__} does not declare {dropped}; not passed.")
+    training_args = SFTConfig(**{k: v for k, v in wanted.items() if k in declared})
 
     trainer = SFTTrainer(
         model=model,
@@ -187,6 +198,7 @@ def run_training(args: Config) -> dict:
             "train_size": len(train_ds),
             "train_runtime_seconds": round(result.metrics["train_runtime"], 1),
             "final_train_loss": round(result.metrics["train_loss"], 4),
+            "sftconfig_fields_not_applied": dropped,
             "trainable_parameters": sum(
                 p.numel() for p in trainer.model.parameters() if p.requires_grad
             ),
