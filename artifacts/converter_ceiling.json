@@ -1,0 +1,31 @@
+{
+  "dataset": "naver-clova-ix/cord-v2",
+  "split": "test",
+  "n_documents": 100,
+  "flat_entity_list": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "unlocated_fields": 0,
+    "note": "The format used. Exact by construction; this run is the proof."
+  },
+  "nested_gt_parse": {
+    "precision": 0.6376582278481012,
+    "recall": 0.6157372039724981,
+    "f1": 0.6265060240963856,
+    "unlocated_fields": 36,
+    "note": "Not used. gt_parse stores values without the printed label word, so it cannot recover spans that cover both. This is the ceiling a model trained on that format could never exceed, whatever its quality."
+  },
+  "categories": {
+    "dataset": "naver-clova-ix/cord-v2",
+    "categories_in_prompt": 29,
+    "categories_in_data": 24,
+    "unused_in_data": [
+      "menu.sub.unitprice",
+      "menu.vatyn",
+      "sub_total.othersvc_price",
+      "void_menu.nm",
+      "void_menu.price"
+    ]
+  }
+}

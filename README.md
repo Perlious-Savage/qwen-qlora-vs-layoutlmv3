@@ -88,10 +88,19 @@ the gold tags — the answer must be exactly 1.000, or the harness is adding err
 read as model weakness. It also measures the ceiling of the obvious alternative target
 format, CORD's nested `gt_parse`, which is why that format was not used:
 
-| target format | ceiling F1 | used |
-|---|---:|---|
-| flat entity list, label word included | TBD | yes |
-| nested `gt_parse`, value only | TBD | no |
+| target format | ceiling F1 | unlocatable fields | used |
+|---|---:|---:|---|
+| flat entity list, label word included | **1.000** | 0 | yes |
+| nested `gt_parse`, value only | **0.627** | 36 | no |
+
+A model trained to emit CORD's nested `gt_parse` could not have scored above 0.627 on
+this metric no matter how well it read receipts, because that view stores `"60.000"`
+where the gold entity is `['TOTAL', '60.000']`. Comparing such a number against 0.948
+would have measured the annotation format, not the model.
+
+The 1.000 was not free. The first run came back 0.974, and the missing 0.026 was the
+converter splitting field text on whitespace when CORD annotates `'( L'` as a single
+word. Without this check that loss would have been attributed to Qwen.
 
 **Unparseable output scores zero.** It is never skipped and never repaired. A document the
 model failed on stays in the denominator; silently dropping it would shrink the test set to
@@ -109,10 +118,24 @@ completion cut off mid-JSON is unparseable and would otherwise read as a model f
 **Few-shot exemplars come from the training split only**, fixed by seed, identical for
 every test document.
 
-**Contamination is measured, not assumed.** `scripts/check_splits.py` hashes each
-document's word sequence and reports train/test overlap. Any overlap is shared with
-Project 1, which trained on the same split, so it affects both sides equally — it is
-reported rather than quietly corrected.
+**Contamination is measured, not assumed, and it is not zero.**
+`scripts/check_splits.py` hashes each document's word sequence:
+
+| check | result |
+|---|---:|
+| test documents with an identical twin in train | **7 / 100** |
+| validation documents with an identical twin in train | 11 / 100 |
+| duplicate pairs within train itself | 24 |
+
+Seven per cent of the test split is memorisable from training data. This is a property
+of CORD-v2, not of either model, and Project 1 trained on the same split — so both sides
+of the comparison are inflated by the same amount and the *difference* between them
+remains meaningful. The absolute numbers, 0.948 included, should be read as slightly
+optimistic. Corrected indices are listed in `artifacts/split_check.json`.
+
+**The token cap is set from measurement.** The longest gold completion in the test split
+is 804 tokens; `MAX_NEW_TOKENS` is 1536, leaving 732 tokens of headroom
+(`artifacts/completion_lengths.json`).
 
 **The model never does arithmetic.** Extracted amounts are parsed with `Decimal` and
 reconciled by `src/tools.py`, exactly as in Project 1. The model reads; code adds up.
@@ -126,6 +149,8 @@ reconciled by `src/tools.py`, exactly as in Project 1. The model reads; code add
   fine-tune is repeated across three seeds and reported as mean ± spread.
 - One GPU, one session. All latency and memory numbers are from that session and are not
   portable to other hardware.
+- 7% of the test split is duplicated in train. Measured above; it inflates both models
+  equally but makes the absolute scores optimistic.
 - CORD-v2 is Indonesian restaurant receipts. None of this generalises to other document
   types without re-measuring.
 

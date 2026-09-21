@@ -109,17 +109,34 @@ def parse_prediction(raw: str | None) -> Extraction | None:
         return None
 
 
-def _find_unclaimed(haystack: list[str], tags: list[str], needle: list[str]) -> int | None:
-    """Leftmost start index where `needle` matches and no position is already tagged."""
-    n = len(needle)
-    if not n or n > len(haystack):
+def _normalize(text: str) -> str:
+    return " ".join(text.split())
+
+
+def _locate(words: list[str], tags: list[str], target: str) -> tuple[int, int] | None:
+    """Leftmost unclaimed run of words whose joined text equals `target`.
+
+    Matching is on the joined string rather than on a list of whitespace-split tokens,
+    because a CORD word can itself contain a space - '( L' is one annotated word in the
+    test split. Splitting the field text on whitespace invents a boundary that is not
+    there, and the entity then matches nothing. That cost 0.026 F1 of pure harness error
+    until `roundtrip_check.py` caught it.
+    """
+    if not target:
         return None
-    for start in range(len(haystack) - n + 1):
-        if haystack[start : start + n] != needle:
+
+    for start in range(len(words)):
+        if tags[start] != "O":
             continue
-        if any(tag != "O" for tag in tags[start : start + n]):
-            continue
-        return start
+        accumulated = ""
+        for end in range(start, len(words)):
+            if tags[end] != "O":
+                break
+            accumulated = words[end] if not accumulated else f"{accumulated} {words[end]}"
+            if len(accumulated) > len(target):
+                break
+            if accumulated == target:
+                return start, end - start + 1
     return None
 
 
@@ -140,20 +157,21 @@ def fields_to_tags(
     `metrics.py` stays byte-identical to Project 1's.
     """
     tags = ["O"] * len(words)
-    folded = [word.casefold() for word in words]
+    exact = [_normalize(word) for word in words]
+    folded = [word.casefold() for word in exact]
     placed = [False] * len(fields)
     located = 0
 
-    for haystack, transform in ((words, str), (folded, str.casefold)):
+    for haystack, transform in ((exact, _normalize), (folded, lambda t: _normalize(t).casefold())):
         for index, field in enumerate(fields):
             if placed[index]:
                 continue
-            needle = [transform(token) for token in field.text.split()]
-            start = _find_unclaimed(haystack, tags, needle)
-            if start is None:
+            found = _locate(haystack, tags, transform(field.text))
+            if found is None:
                 continue
+            start, width = found
             tags[start] = f"B-{field.type}"
-            for position in range(start + 1, start + len(needle)):
+            for position in range(start + 1, start + width):
                 tags[position] = f"I-{field.type}"
             placed[index] = True
             located += 1
@@ -163,7 +181,7 @@ def fields_to_tags(
         if placed[index]:
             continue
         # An empty `text` also lands here: it locates nowhere, so it is one wrong answer.
-        width = max(1, len(field.text.split()))
+        width = max(1, len(fields[index].text.split()))
         phantom.append(f"B-{field.type}")
         phantom.extend([f"I-{field.type}"] * (width - 1))
 

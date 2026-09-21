@@ -19,14 +19,20 @@ import random
 from .convert import FieldSpan, build_completion, gold_fields
 from .data import DATASET_ID, parse_example
 
-# CORD's published label schema. Hardcoded rather than derived from the dataset so the
-# prompt is identical offline, on Colab and in CI, and so building it never has to touch
-# the test split. `verify_categories` checks this against the real data; a category that
-# appears in the data but not here would be a field the model is never told to emit.
+# The 29 categories CORD-v2 actually uses, enumerated from the dataset and then frozen
+# here so the prompt is identical offline, on Colab and in CI. `verify_categories` checks
+# it back against the data: a category present in the data but missing here would be a
+# field the model is never told to emit, and it would lose those entities silently.
+#
+# 29 categories is 59 BIO labels, which is what Project 1's label list came to - the two
+# projects are working from the same vocabulary.
+#
+# No category occurs in test that does not also occur in train, so nothing here is derived
+# from the test split.
 CATEGORIES = [
     "menu.nm", "menu.num", "menu.unitprice", "menu.cnt", "menu.discountprice",
     "menu.price", "menu.itemsubtotal", "menu.vatyn", "menu.etc",
-    "menu.sub_nm", "menu.sub_unitprice", "menu.sub_cnt", "menu.sub_price", "menu.sub_etc",
+    "menu.sub.nm", "menu.sub.unitprice", "menu.sub.cnt", "menu.sub.price",
     "void_menu.nm", "void_menu.price",
     "sub_total.subtotal_price", "sub_total.discount_price", "sub_total.service_price",
     "sub_total.othersvc_price", "sub_total.tax_price", "sub_total.etc",

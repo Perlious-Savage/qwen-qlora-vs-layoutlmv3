@@ -1,0 +1,12 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "split": "test",
+  "n_documents": 100,
+  "min": 95,
+  "median": 224.0,
+  "p95": 560,
+  "max": 804,
+  "max_new_tokens": 1536,
+  "headroom_over_max": 732,
+  "note": "MAX_NEW_TOKENS must exceed max. A truncated completion is unparseable and scores zero, which reads as a model failure rather than a config failure."
+}

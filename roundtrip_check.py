@@ -57,6 +57,10 @@ def main() -> None:
     print(f"Loading {DATASET_ID} test split ...")
     dataset = load_dataset(DATASET_ID, split="test")
 
+    # Checked before the scoring loop so a vocabulary mismatch surfaces on its own rather
+    # than hiding behind an F1 that was computed and then thrown away.
+    categories = verify_categories(dataset)
+
     references: list[list[str]] = []
     flat_predictions: list[list[str]] = []
     nested_predictions: list[list[str]] = []
@@ -104,7 +108,7 @@ def main() -> None:
                 "trained on that format could never exceed, whatever its quality."
             ),
         },
-        "categories": verify_categories(dataset),
+        "categories": categories,
     }
 
     ARTIFACTS.mkdir(exist_ok=True)

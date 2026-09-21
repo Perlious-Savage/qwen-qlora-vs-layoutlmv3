@@ -69,6 +69,22 @@ def test_gold_json_round_trips_to_the_exact_same_spans():
     assert "O" not in tags
 
 
+def test_a_word_containing_a_space_is_still_one_word():
+    """CORD annotates '( L' as a single word. Splitting field text on whitespace invents
+    a boundary that is not there, the entity matches nothing, and the harness loses F1
+    that looks like model error. This cost 0.026 before `roundtrip_check.py` caught it."""
+    ground_truth = make_ground_truth(
+        [("menu.nm", ["JASMINE", "MT", "( L", ")"]), ("menu.price", ["8.000"])]
+    )
+    parsed = parse_example(ground_truth, width=1000, height=1000)
+
+    tags, stats = fields_to_tags(parsed["words"], gold_fields(ground_truth))
+
+    assert stats.unlocated == 0
+    assert tags == parsed["ner_tags"]
+    assert precision_recall_f1([parsed["ner_tags"]], [tags]) == (1.0, 1.0, 1.0)
+
+
 def test_gold_fields_matches_the_word_list_data_py_builds():
     """`gold_fields` and `parse_example` must filter words identically or the round trip rots."""
     ground_truth = make_ground_truth(

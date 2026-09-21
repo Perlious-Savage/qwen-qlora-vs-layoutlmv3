@@ -48,6 +48,18 @@ MAX_NEW_TOKENS = 1536
 DECODE = {"max_new_tokens": MAX_NEW_TOKENS, "do_sample": False}
 
 
+def dtype_kwargs(dtype) -> dict:
+    """`torch_dtype` was renamed to `dtype` in transformers 4.56.
+
+    Colab's pinned version moves around, and discovering the rename after a model has
+    finished downloading costs more than the four lines it takes to handle here.
+    """
+    import transformers
+
+    major, minor = (int(part) for part in transformers.__version__.split(".")[:2])
+    return {"dtype" if (major, minor) >= (4, 56) else "torch_dtype": dtype}
+
+
 def _prompts(dataset, fewshot: list[dict] | None) -> tuple[list[list[dict]], list[list[str]]]:
     prompts, words_per_document = [], []
     for record in dataset:

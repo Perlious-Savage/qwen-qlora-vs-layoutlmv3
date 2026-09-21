@@ -17,10 +17,10 @@
 
 | target format | ceiling F1 | used |
 |---|---:|---|
-| flat entity list, label word included | TBD | yes |
-| nested `gt_parse`, value only | TBD | no |
+| flat entity list, label word included | 1.000 | yes |
+| nested `gt_parse`, value only | 0.627 | no |
 
 ## Checks
 
-- train/test word-sequence overlap: TBD
+- train/test word-sequence overlap: 7
 - truncated generations (QLoRA): TBD

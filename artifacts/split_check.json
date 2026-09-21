@@ -1,0 +1,31 @@
+{
+  "dataset": "naver-clova-ix/cord-v2",
+  "method": "sha256 of the space-joined word sequence from data.parse_example",
+  "n_documents": {
+    "train": 800,
+    "validation": 100,
+    "test": 100
+  },
+  "n_unique_documents": {
+    "train": 776,
+    "validation": 100,
+    "test": 100
+  },
+  "duplicates_within_split": {
+    "train": 24,
+    "validation": 0,
+    "test": 0
+  },
+  "train_test_overlap": 7,
+  "train_validation_overlap": 11,
+  "overlapping_test_indices": [
+    25,
+    28,
+    31,
+    68,
+    69,
+    75,
+    90
+  ],
+  "note": "Any overlap is shared with Project 1, which trained on the same split. It affects both sides of the comparison equally and is reported, not corrected."
+}
