@@ -62,6 +62,9 @@ def efficiency_table() -> str:
             continue
         found = True
         for result in report["results"]:
+            if "error" in result:
+                rows.append(f"| {result['config']} | _failed: {result['error']}_ | - | - | - | - | - |")
+                continue
             rows.append(
                 f"| {result['config']} | {result['workload']} | {result['load_seconds']} | "
                 f"{result['warm_latency_p50_ms']} | {result['warm_latency_p95_ms']} | "

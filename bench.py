@@ -271,18 +271,32 @@ def main() -> None:
     test = load_dataset(DATASET_ID, split="test").select(range(args.documents))
     documents = [words_of(record) for record in test]
 
-    results = []
     if args.engine == "hf":
-        results.append(bench_hf("qwen-base-bf16", documents, None, False))
-        results.append(bench_hf("qwen-lora-merged-bf16", documents, args.adapter, False))
-        results.append(bench_hf("qwen-lora-4bit", documents, args.adapter, True))
+        configs = [
+            ("qwen-base-bf16", lambda n: bench_hf(n, documents, None, False)),
+            ("qwen-lora-merged-bf16", lambda n: bench_hf(n, documents, args.adapter, False)),
+            ("qwen-lora-4bit", lambda n: bench_hf(n, documents, args.adapter, True)),
+        ]
     else:
-        results.append(bench_vllm("qwen-base-bf16", documents, None, None))
-        results.append(bench_vllm("qwen-lora-bf16", documents, args.adapter, None))
-        results.append(bench_vllm("qwen-lora-4bit", documents, args.adapter, "bitsandbytes"))
-
+        configs = [
+            ("qwen-base-bf16", lambda n: bench_vllm(n, documents, None, None)),
+            ("qwen-lora-bf16", lambda n: bench_vllm(n, documents, args.adapter, None)),
+            ("qwen-lora-4bit", lambda n: bench_vllm(n, documents, args.adapter, "bitsandbytes")),
+        ]
     if not args.skip_encoder:
-        results.append(bench_layoutlmv3(documents))
+        configs.append(("layoutlmv3-base", lambda n: bench_layoutlmv3(documents)))
+
+    # One configuration failing - a quantization backend missing, a GPU too small to
+    # merge in bf16 - must not discard the configurations that already ran. The failure
+    # is recorded in place of its row, so the table shows what was measured and what was
+    # not, rather than quietly containing fewer rows than it claims.
+    results = []
+    for name, run in configs:
+        try:
+            results.append(run(name))
+        except Exception as exc:
+            print(f"!! {name} failed: {type(exc).__name__}: {exc}")
+            results.append({"config": name, "error": f"{type(exc).__name__}: {exc}"})
 
     report = {
         "engine": args.engine,
@@ -304,7 +318,9 @@ def main() -> None:
         "| config | workload | load s | p50 ms | p95 ms | tok/s | peak VRAM GB |",
         "|---|---|---:|---:|---:|---:|---:|",
     ] + [
-        f"| {r['config']} | {r['workload']} | {r['load_seconds']} | "
+        f"| {r['config']} | _{r['error']}_ | - | - | - | - | - |"
+        if "error" in r
+        else f"| {r['config']} | {r['workload']} | {r['load_seconds']} | "
         f"{r['warm_latency_p50_ms']} | {r['warm_latency_p95_ms']} | "
         f"{r['tokens_per_second'] or '-'} | {r['peak_vram_gb']} |"
         for r in results
