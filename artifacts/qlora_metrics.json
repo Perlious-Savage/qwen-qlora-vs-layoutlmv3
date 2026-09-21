@@ -1,0 +1,19 @@
+{
+  "config": "qlora",
+  "dataset": "naver-clova-ix/cord-v2",
+  "split": "test",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "n_documents": 100,
+  "test_precision": 0.9095092024539877,
+  "test_recall": 0.906035141329259,
+  "test_f1": 0.9077688480673555,
+  "parse_rate": 1.0,
+  "locate_rate": 0.9976993865030674,
+  "truncation_rate": 0.0,
+  "n_predicted_fields": 1304,
+  "fewshot_examples": 0,
+  "decode": {
+    "max_new_tokens": 1536,
+    "do_sample": false
+  }
+}

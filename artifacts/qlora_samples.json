@@ -1,0 +1,102 @@
+[
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.num\", \"text\": \"901016\"}, {\"type\": \"menu.nm\", \"text\": \"-TICKET CP\"}, {\"type\": \"menu.cnt\", \"text\": \"2\"}, {\"type\": \"menu.unitprice\", \"text\": \"60.000\"}, {\"type\": \"menu.price\", \"text\": \"60.000\"}, {\"type\": \"sub_total.discount_price\", \"text\": \"TOTAL DISC $ -60.000\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"TAX 5.455\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Subtotal 60.000\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 60.000\"}, {\"type\": \"total.menuqty_cnt\", \"text\": \"(Qty 2.00\"}, {\"type\": \"total.creditcardprice\", \"text\": \"EDC CIMB NIAGA\"}, {\"type\": \"total.cashprice\", \"text\": \"No: xx7730\"}, {\"type\": \"total.changeprice\", \"text\": \"60.000\"}]}",
+    "parsed": true,
+    "located": 13
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"J.STB PROMO\"}, {\"type\": \"menu.price\", \"text\": \"17500\"}, {\"type\": \"menu.nm\", \"text\": \"Y.B.BAT\"}, {\"type\": \"menu.price\", \"text\": \"46000\"}, {\"type\": \"menu.nm\", \"text\": \"Y.BASO PROM\"}, {\"type\": \"menu.price\", \"text\": \"27500\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 91000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 91000\"}]}",
+    "parsed": true,
+    "located": 8
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"JASMINE MT ( L )\"}, {\"type\": \"menu.price\", \"text\": \"24,000\"}, {\"type\": \"menu.nm\", \"text\": \"COCONUT JELLY ( L )\"}, {\"type\": \"menu.price\", \"text\": \"4,000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"SUB TOTAL 28,000\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL SAI S 28,000\"}, {\"type\": \"total.menuqty_cnt\", \"text\": \"TOTAL ITEMS 1\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 100,000\"}, {\"type\": \"total.changeprice\", \"text\": \"CHANGE 72,000\"}]}",
+    "parsed": true,
+    "located": 10
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1X\"}, {\"type\": \"menu.unitprice\", \"text\": \"@11000\"}, {\"type\": \"menu.nm\", \"text\": \"DONAT GULA\"}, {\"type\": \"menu.price\", \"text\": \"11,000\"}, {\"type\": \"total.menuqty_cnt\", \"text\": \"1.00xITEMs\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"SUBTOTAL 11,000\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 11,000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 11,000\"}]}",
+    "parsed": true,
+    "located": 8
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"ICE BLACKCOFFE\"}, {\"type\": \"menu.cnt\", \"text\": \"2\"}, {\"type\": \"menu.price\", \"text\": \"82,000\"}, {\"type\": \"menu.nm\", \"text\": \"AVOCADO COFFEE\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"61,000\"}, {\"type\": \"menu.nm\", \"text\": \"CHIKEN KATSU FF\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"51,000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"SUB_TOTAL 194,000\"}, {\"type\": \"sub_total.discount_price\", \"text\": \"DISCOUNT 19,400\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 174,600\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 200,000\"}, {\"type\": \"total.changeprice\", \"text\": \"CHANGE 25,400\"}]}",
+    "parsed": true,
+    "located": 14
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"TRAD KY TOAST CARTE\"}, {\"type\": \"menu.price\", \"text\": \"28.182\"}, {\"type\": \"menu.cnt\", \"text\": \"ITEMS 1.00\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"SUBTTL 28.182\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"PB-1 10% 2.818\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 31.000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 31.000\"}]}",
+    "parsed": true,
+    "located": 7
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"EGG TART\"}, {\"type\": \"menu.price\", \"text\": \"13,000\"}, {\"type\": \"menu.cnt\", \"text\": \"2\"}, {\"type\": \"menu.nm\", \"text\": \"CHOCO CUS ARD PASTRY\"}, {\"type\": \"menu.price\", \"text\": \"24,000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"REDBEAN BREAD\"}, {\"type\": \"menu.price\", \"text\": \"9,000\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 46,000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 50,000\"}, {\"type\": \"total.changeprice\", \"text\": \"CHANGE 4,000\"}]}",
+    "parsed": true,
+    "located": 12
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"Kupon 15\"}, {\"type\": \"menu.price\", \"text\": \"100,000\"}, {\"type\": \"menu.nm\", \"text\": \"ADD CHICKEN BOX 909\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Subtotal 100,909\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"PB1 (10%) 10,091\"}, {\"type\": \"total.total_price\", \"text\": \"Total 111,000\"}, {\"type\": \"total.cashprice\", \"text\": \"Cash Rp. 111,000\"}]}",
+    "parsed": true,
+    "located": 7
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"[REG] BLACK SAKURA\"}, {\"type\": \"menu.price\", \"text\": \"45,455\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"COOKIE DOH SAUCES\"}, {\"type\": \"menu.price\", \"text\": \"0\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"NATA DE COCO\"}, {\"type\": \"menu.price\", \"text\": \"0\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Sub Total 45,455\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"PB1 (10%) 4,545\"}, {\"type\": \"sub_total.etc\", \"text\": \"Rounding 0\"}, {\"type\": \"total.total_price\", \"text\": \"Total 50,000\"}, {\"type\": \"total.creditcardprice\", \"text\": \"Card Payment 50,000\"}]}",
+    "parsed": true,
+    "located": 14
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"Bumbu Kaldu Ayam\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.unitprice\", \"text\": \"36000\"}, {\"type\": \"menu.price\", \"text\": \"36000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Sub Total 36000\"}, {\"type\": \"sub_total.discount_price\", \"text\": \"Discount (0%)\"}, {\"type\": \"total.cashprice\", \"text\": \"Tunai 50000\"}, {\"type\": \"total.changeprice\", \"text\": \"Kembalian 14000\"}]}",
+    "parsed": true,
+    "located": 6
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"CINNAMON SUGAR\"}, {\"type\": \"menu.cnt\", \"text\": \"1 x\"}, {\"type\": \"menu.unitprice\", \"text\": \"17,000\"}, {\"type\": \"menu.price\", \"text\": \"17,000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"SUB TOTAL 17,000\"}, {\"type\": \"total.total_price\", \"text\": \"GRAND TOTAL 17,000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH IDR 20,000\"}, {\"type\": \"total.changeprice\", \"text\": \"CHANGE DUE 3,000\"}]}",
+    "parsed": true,
+    "located": 8
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"BANABERRY FRESH CREAM CAK\"}, {\"type\": \"menu.price\", \"text\": \"230,000\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 230,000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 230,000\"}, {\"type\": \"total.changeprice\", \"text\": \"CHANGE 0\"}]}",
+    "parsed": true,
+    "located": 6
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.num\", \"text\": \"0571-1854\"}, {\"type\": \"menu.nm\", \"text\": \"BLUS WANITA 1\"}, {\"type\": \"menu.unitprice\", \"text\": \"@120,000\"}, {\"type\": \"menu.discountprice\", \"text\": \"0%\"}, {\"type\": \"menu.price\", \"text\": \"120,000\"}, {\"type\": \"menu.num\", \"text\": \"1002-0060\"}, {\"type\": \"menu.nm\", \"text\": \"SHOPPING BAG 1\"}, {\"type\": \"menu.unitprice\", \"text\": \"@880\"}, {\"type\": \"menu.discountprice\", \"text\": \"100%\"}, {\"type\": \"menu.price\", \"text\": \"0\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 120,000\"}, {\"type\": \"total.menuqty_cnt\", \"text\": \"(2 item)\"}, {\"type\": \"total.creditcardprice\", \"text\": \"CC.Visa.BCA 120,000\"}, {\"type\": \"total.changeprice\", \"text\": \"Total Kembalian 0\"}]}",
+    "parsed": true,
+    "located": 14
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"BASO KUAH\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.unitprice\", \"text\": \"43.636\"}, {\"type\": \"menu.price\", \"text\": \"43.636\"}, {\"type\": \"menu.nm\", \"text\": \"A.MINERAL GELAS\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.unitprice\", \"text\": \"3,000\"}, {\"type\": \"menu.price\", \"text\": \"3,000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"TOTAL 46.636\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"DPP 46.636\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"TAX 10.00 % 4.664\"}, {\"type\": \"total.total_price\", \"text\": \"GRAND TOTAL 51.300\"}, {\"type\": \"total.cashprice\", \"text\": \"TUNAI 52.000\"}, {\"type\": \"total.changeprice\", \"text\": \"KEMBALI 700\"}]}",
+    "parsed": true,
+    "located": 14
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"RedVelvet Cheese Slc\"}, {\"type\": \"menu.price\", \"text\": \"38,000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Chicken Baked Rice\"}, {\"type\": \"menu.price\", \"text\": \"55,000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Fish n Chips\"}, {\"type\": \"menu.price\", \"text\": \"65,000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Mushroom Soup\"}, {\"type\": \"menu.price\", \"text\": \"35,000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Chamomile\"}, {\"type\": \"menu.price\", \"text\": \"25,000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Iced Tea\"}, {\"type\": \"menu.price\", \"text\": \"20,000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"SUBTOTAL 238,000\"}, {\"type\": \"sub_total.service_price\", \"text\": \"Service 17,850\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"PB1 25,585\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 281,435\"}, {\"type\": \"total.total_etc\", \"text\": \"Coupon 100,000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 200,000\"}, {\"type\": \"total.changeprice\", \"text\": \"Change 18,565\"}]}",
+    "parsed": true,
+    "located": 25
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Lemon Tea (L)\"}, {\"type\": \"menu.price\", \"text\": \"25.000\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"Caramel Small\"}, {\"type\": \"menu.price\", \"text\": \"38.000\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL 63.000\"}, {\"type\": \"total.cashprice\", \"text\": \"CASH 70.000\"}, {\"type\": \"total.changeprice\", \"text\": \"CHANGED 7.000\"}]}",
+    "parsed": true,
+    "located": 9
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.nm\", \"text\": \"[LG] BLACK SAKURA\"}, {\"type\": \"menu.price\", \"text\": \"59,091\"}, {\"type\": \"menu.sub.cnt\", \"text\": \"1\"}, {\"type\": \"menu.sub.nm\", \"text\": \"LONGAN\"}, {\"type\": \"menu.sub.price\", \"text\": \"0\"}, {\"type\": \"menu.sub.cnt\", \"text\": \"1\"}, {\"type\": \"menu.sub.nm\", \"text\": \"ROASTED ALMOND\"}, {\"type\": \"menu.sub.price\", \"text\": \"0\"}, {\"type\": \"menu.sub.cnt\", \"text\": \"1\"}, {\"type\": \"menu.sub.nm\", \"text\": \"IVANGGO\"}, {\"type\": \"menu.sub.price\", \"text\": \"0\"}, {\"type\": \"menu.sub.cnt\", \"text\": \"1\"}, {\"type\": \"menu.sub.nm\", \"text\": \"IVINERAL WATER (bundling) 5k\"}, {\"type\": \"menu.sub.price\", \"text\": \"4,545\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Sub Total 63,636\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"PB1 (10%) 6,364\"}, {\"type\": \"sub_total.etc\", \"text\": \"Rounding 0\"}, {\"type\": \"total.total_price\", \"text\": \"Total 70,000\"}, {\"type\": \"total.cashprice\", \"text\": \"Cash Payment 100,000\"}, {\"type\": \"total.changeprice\", \"text\": \"Change 30,000\"}]}",
+    "parsed": true,
+    "located": 21
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"Goblin's Mace\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"25,000\"}, {\"type\": \"menu.nm\", \"text\": \"Mozarella Hot Dog\"}, {\"type\": \"menu.cnt\", \"text\": \"2\"}, {\"type\": \"menu.price\", \"text\": \"38,000\"}, {\"type\": \"menu.nm\", \"text\": \"Chili Pepper Croquette\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"14,000\"}, {\"type\": \"menu.nm\", \"text\": \"Cheese Croquette\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"14,000\"}, {\"type\": \"menu.nm\", \"text\": \"Plastik Amook\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"0\"}, {\"type\": \"menu.nm\", \"text\": \"Plastik Putih Take Away\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.price\", \"text\": \"0\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Subtotal 91,000\"}, {\"type\": \"sub_total.discount_price\", \"text\": \"Discount (0)\"}, {\"type\": \"total.total_price\", \"text\": \"TOTAL Rp. 91,000\"}, {\"type\": \"total.creditcardprice\", \"text\": \"Debit 91,000\"}]}",
+    "parsed": true,
+    "located": 22
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.nm\", \"text\": \"Propolis Cair\"}, {\"type\": \"menu.cnt\", \"text\": \"1\"}, {\"type\": \"menu.unitprice\", \"text\": \"156000\"}, {\"type\": \"menu.price\", \"text\": \"156000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"Sub Tofal 156000\"}, {\"type\": \"total.cashprice\", \"text\": \"Tunai 156000\"}, {\"type\": \"total.changeprice\", \"text\": \"Kembalian Rp. 0\"}]}",
+    "parsed": true,
+    "located": 7
+  },
+  {
+    "raw": "{\"fields\": [{\"type\": \"menu.cnt\", \"text\": \"4\"}, {\"type\": \"menu.nm\", \"text\": \"AMBUSH DBL CHS\"}, {\"type\": \"menu.price\", \"text\": \"60000\"}, {\"type\": \"menu.cnt\", \"text\": \"10\"}, {\"type\": \"menu.nm\", \"text\": \"AMBUSH CHS BUR\"}, {\"type\": \"menu.price\", \"text\": \"100000\"}, {\"type\": \"sub_total.subtotal_price\", \"text\": \"NET SALES 160000\"}, {\"type\": \"sub_total.tax_price\", \"text\": \"TAX 16000\"}, {\"type\": \"total.total_price\", \"text\": \"AMOUNT DUE 176000\"}]}",
+    "parsed": true,
+    "located": 9
+  }
+]

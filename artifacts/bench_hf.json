@@ -1,0 +1,63 @@
+{
+  "engine": "hf",
+  "n_documents": 10,
+  "dataset": "naver-clova-ix/cord-v2",
+  "results": [
+    {
+      "config": "qwen-base-bf16",
+      "workload": "autoregressive generation, batch size 1",
+      "load_seconds": 8.0,
+      "warm_latency_p50_ms": 5422,
+      "warm_latency_p95_ms": 7774,
+      "tokens_per_second": 29.0,
+      "peak_vram_gb": 14.27,
+      "engine": "transformers",
+      "adapter_merged": false,
+      "quantization": "bf16",
+      "mean_generated_tokens": 177.9,
+      "on_disk_gb": null
+    },
+    {
+      "config": "qwen-lora-merged-bf16",
+      "workload": "autoregressive generation, batch size 1",
+      "load_seconds": 9.1,
+      "warm_latency_p50_ms": 6416,
+      "warm_latency_p95_ms": 9188,
+      "tokens_per_second": 28.8,
+      "peak_vram_gb": 14.85,
+      "engine": "transformers",
+      "adapter_merged": true,
+      "quantization": "bf16",
+      "mean_generated_tokens": 202.7,
+      "on_disk_gb": 0.0859
+    },
+    {
+      "config": "qwen-lora-4bit",
+      "workload": "autoregressive generation, batch size 1",
+      "load_seconds": 7.9,
+      "warm_latency_p50_ms": 18978,
+      "warm_latency_p95_ms": 27114,
+      "tokens_per_second": 9.8,
+      "peak_vram_gb": 5.53,
+      "engine": "transformers",
+      "adapter_merged": false,
+      "quantization": "nf4",
+      "mean_generated_tokens": 202.9,
+      "on_disk_gb": 0.0859
+    },
+    {
+      "config": "layoutlmv3-base",
+      "workload": "single forward pass, 512 tokens - NOT the same work as generation",
+      "load_seconds": 11.0,
+      "warm_latency_p50_ms": 20,
+      "warm_latency_p95_ms": 23,
+      "tokens_per_second": null,
+      "peak_vram_gb": 0.63,
+      "engine": "transformers",
+      "quantization": "fp32",
+      "parameters": 125328514,
+      "note": "Base checkpoint, not Project 1's fine-tuned weights: latency, memory and size depend on the architecture, not on what the weights learned."
+    }
+  ],
+  "note": "One process, one GPU, peak memory reset between configurations. Rows using different engines or different workloads are not directly comparable; the workload field says which is which."
+}

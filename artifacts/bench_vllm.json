@@ -1,0 +1,42 @@
+{
+  "engine": "vllm",
+  "n_documents": 10,
+  "dataset": "naver-clova-ix/cord-v2",
+  "results": [
+    {
+      "config": "qwen-base-bf16",
+      "workload": "autoregressive generation; latency at batch 1, throughput batched",
+      "load_seconds": 230.0,
+      "warm_latency_p50_ms": 1601,
+      "warm_latency_p95_ms": 2271,
+      "tokens_per_second": 665.5,
+      "peak_vram_gb": null,
+      "engine": "vllm",
+      "quantization": "bf16",
+      "batch_size_for_throughput": 10,
+      "mean_generated_tokens": 180.0,
+      "on_disk_gb": null,
+      "peak_vram_note": "Not measurable from the parent process: vLLM allocates in a separate worker. Use the transformers rows for memory."
+    },
+    {
+      "config": "qwen-lora-bf16",
+      "workload": "autoregressive generation; latency at batch 1, throughput batched",
+      "load_seconds": 112.0,
+      "warm_latency_p50_ms": 2278,
+      "warm_latency_p95_ms": 3254,
+      "tokens_per_second": 608.7,
+      "peak_vram_gb": null,
+      "engine": "vllm",
+      "quantization": "bf16",
+      "batch_size_for_throughput": 10,
+      "mean_generated_tokens": 202.7,
+      "on_disk_gb": 0.0859,
+      "peak_vram_note": "Not measurable from the parent process: vLLM allocates in a separate worker. Use the transformers rows for memory."
+    },
+    {
+      "config": "qwen-lora-4bit",
+      "error": "ValidationError: 1 validation error for ModelConfig\n  Value error, Unknown quantization method: bitsandbytes. Must be one of ['awq', 'auto_awq', 'fp8', 'fbgemm_fp8', 'fp_quant', 'modelopt', 'modelopt_fp4', 'modelopt_mxfp8', 'modelopt_mixed', 'auto_gptq', 'gptq', 'gptq_marlin', 'awq_marlin', 'humming', 'compressed-tensors', 'experts_int8', 'quark', 'moe_wna16', 'torchao', 'inc', 'mxfp4', 'gpt_oss_mxfp4', 'deepseek_v4_fp8', 'online', 'fp8_per_tensor', 'fp8_per_block', 'fp8_per_channel', 'int8_per_channel_weight_only', 'nvfp4_per_token', 'mxfp8']. [type=value_error, input_value=ArgsKwargs((), {'model': ...nderer_num_workers': 1}), input_type=ArgsKwargs]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+    }
+  ],
+  "note": "One process, one GPU, peak memory reset between configurations. Rows using different engines or different workloads are not directly comparable; the workload field says which is which. vLLM peak VRAM is not measured - see peak_vram_note. This run is a separate Colab session from bench_hf.json, so latency is comparable within this table but not across the two."
+}

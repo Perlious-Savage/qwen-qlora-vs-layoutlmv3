@@ -1,0 +1,34 @@
+{
+  "epochs": 3.0,
+  "lr": 0.0002,
+  "batch_size": 4,
+  "grad_accum": 4,
+  "lora_rank": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "max_length": 4096,
+  "seed": 0,
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "max_train": 0,
+  "train_size": 800,
+  "train_runtime_seconds": 888.7,
+  "final_train_loss": 0.0103,
+  "sftconfig_fields_not_applied": [
+    "warmup_ratio"
+  ],
+  "trainable_parameters": 40370176,
+  "total_parameters": 4393342464,
+  "adapter_path": "outputs/qwen-cord-lora",
+  "adapter_bytes": 92230057,
+  "gpu": "NVIDIA A100-SXM4 (Colab)",
+  "provenance": "Transcribed verbatim from the run's own printed JSON. The Colab runtime was deleted before this file was downloaded, after a vLLM install broke the environment. The numbers are the script's output, copied, not recomputed."
+}

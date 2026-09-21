@@ -1,0 +1,20 @@
+{
+  "config": "base",
+  "dataset": "naver-clova-ix/cord-v2",
+  "split": "test",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "n_documents": 100,
+  "test_precision": 0.7390510948905109,
+  "test_recall": 0.6187929717341482,
+  "test_f1": 0.6735966735966735,
+  "parse_rate": 0.97,
+  "locate_rate": 0.9863138686131386,
+  "truncation_rate": 0.0,
+  "n_predicted_fields": 1096,
+  "fewshot_examples": 2,
+  "decode": {
+    "max_new_tokens": 1536,
+    "do_sample": false
+  },
+  "provenance": "Transcribed verbatim from the run's own printed JSON. The Colab runtime was deleted before this file was downloaded, after a vLLM install broke the environment. The numbers are the script's output, copied, not recomputed."
+}

@@ -50,29 +50,52 @@ def accuracy_table() -> str:
     return "\n".join(rows)
 
 
+ENGINE_TITLES = {
+    "hf": "### transformers, batch size 1",
+    "vllm": "### vLLM (separate session - compare within this table, not against the one above)",
+}
+
+
+def _short(error: str, limit: int = 90) -> str:
+    """One line, bounded. A multi-line exception pasted into a cell destroys the table."""
+    first = error.split("\n")[0].strip()
+    return first if len(first) <= limit else first[: limit - 1] + "…"
+
+
 def efficiency_table() -> str:
-    rows = [
-        "| config | workload | load s | p50 ms | p95 ms | tok/s | peak VRAM GB |",
-        "|---|---|---:|---:|---:|---:|---:|",
-    ]
-    found = False
+    sections = []
     for engine in ("hf", "vllm"):
         report = load(f"bench_{engine}.json")
         if not report:
             continue
-        found = True
+        rows = [
+            ENGINE_TITLES[engine],
+            "",
+            "| config | workload | load s | p50 ms | p95 ms | tok/s | peak VRAM GB |",
+            "|---|---|---:|---:|---:|---:|---:|",
+        ]
         for result in report["results"]:
             if "error" in result:
-                rows.append(f"| {result['config']} | _failed: {result['error']}_ | - | - | - | - | - |")
+                rows.append(
+                    f"| {result['config']} | **not measured** - {_short(result['error'])} "
+                    "| - | - | - | - | - |"
+                )
                 continue
             rows.append(
                 f"| {result['config']} | {result['workload']} | {result['load_seconds']} | "
                 f"{result['warm_latency_p50_ms']} | {result['warm_latency_p95_ms']} | "
-                f"{result['tokens_per_second'] or '-'} | {result['peak_vram_gb']} |"
+                f"{result['tokens_per_second'] or '-'} | "
+                f"{result['peak_vram_gb'] if result.get('peak_vram_gb') is not None else 'n/a'} |"
             )
-    if not found:
-        rows.append("| _not yet measured_ | - | TBD | TBD | TBD | TBD | TBD |")
-    return "\n".join(rows)
+        sections.append("\n".join(rows))
+
+    if not sections:
+        return (
+            "| config | workload | load s | p50 ms | p95 ms | tok/s | peak VRAM GB |\n"
+            "|---|---|---:|---:|---:|---:|---:|\n"
+            "| _not yet measured_ | - | TBD | TBD | TBD | TBD | TBD |"
+        )
+    return "\n\n".join(sections)
 
 
 def ceiling_table() -> str:

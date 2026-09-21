@@ -1,0 +1,30 @@
+field                           prec     rec      f1  support
+-------------------------------------------------------------
+menu.cnt                       0.945   0.945   0.945      220
+menu.discountprice             0.583   0.700   0.636       10
+menu.etc                       0.000   0.000   0.000        3
+menu.itemsubtotal              0.000   0.000   0.000        6
+menu.nm                        0.911   0.932   0.921      251
+menu.num                       0.727   0.727   0.727       11
+menu.price                     0.929   0.955   0.942      246
+menu.qty_cnt                   0.000   0.000   0.000        0
+menu.sub.cnt                   0.812   0.765   0.788       17
+menu.sub.nm                    0.667   0.611   0.638       36
+menu.sub.price                 0.875   0.700   0.778       20
+menu.unitprice                 0.848   0.836   0.842       67
+menu.vatyn                     0.000   0.000   0.000        0
+sub_total.discount_price       1.000   1.000   1.000        7
+sub_total.etc                  0.900   0.692   0.783       13
+sub_total.service_price        1.000   1.000   1.000       12
+sub_total.subtotal_price       0.915   0.985   0.949       66
+sub_total.tax_price            0.977   0.933   0.955       45
+total.cashprice                0.955   0.913   0.933       69
+total.changeprice              0.948   0.982   0.965       56
+total.creditcardprice          0.875   0.824   0.848       17
+total.emoneyprice              0.667   1.000   0.800        2
+total.menuqty_cnt              0.781   0.862   0.820       29
+total.menutype_cnt             0.750   0.429   0.545        7
+total.total_etc                1.000   0.333   0.500        3
+total.total_price              0.958   0.948   0.953       96
+-------------------------------------------------------------
+micro avg                      0.910   0.906   0.908     1309

@@ -1,0 +1,17 @@
+{
+  "engine": "hf",
+  "n_documents": 10,
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "python": "3.13.15",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "datasets": "4.8.5",
+    "peft": "0.20.0",
+    "trl": "1.13.0",
+    "bitsandbytes": "0.50.2",
+    "vllm": "not installed",
+    "accelerate": "1.14.0",
+    "pydantic": "2.13.5"
+  }
+}
