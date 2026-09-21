@@ -1,0 +1,14 @@
+{
+  "epochs": 8.0,
+  "lr": 5e-05,
+  "batch_size": 4,
+  "model": "microsoft/layoutlmv3-base",
+  "max_train": 0,
+  "device": "cuda",
+  "gpu": "NVIDIA A100-SXM4 (Colab High-RAM)",
+  "train_runtime_seconds": 710.8,
+  "train_samples_per_second": 9.004,
+  "final_train_loss": 0.3376,
+  "validation_f1_by_epoch": [0.8201, 0.9227, 0.9207, 0.9500, 0.9463, 0.9520, 0.9552, 0.9552],
+  "note": "Validation F1 plateaus from epoch 6. Further epochs did not help."
+}

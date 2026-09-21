@@ -1,0 +1,28 @@
+# Files copied byte-identical from Project 1 and never edited here.
+#
+#   source: https://github.com/Perlious-Savage/financial-document-intelligence
+#   commit: befda04daa2216e2431643a8ed0eec00c0167daa (2026-09-21)
+#
+# src/metrics.py is the scoring contract. If it differs by one byte between the two
+# projects, "0.948 vs whatever Qwen scores" is no longer a like-for-like comparison,
+# and nothing downstream is trustworthy. The other four define the word sequence and
+# gold tags that scoring runs over, so they are pinned for the same reason.
+#
+# Verified by `sha256sum -c VENDORED.sha256`, which CI runs on every push. A .gitattributes
+# entry disables line-ending normalisation, without which these hashes would not survive
+# a checkout on a different platform.
+#
+# Why not import them from Project 1 as a dependency: a git submodule or a pip install
+# from a URL is one more thing that can silently resolve to a different revision. A file
+# plus its hash cannot.
+#
+# src/metrics.py    entity-level P/R/F1. Type and full span must match exactly.
+# src/data.py       CORD-v2 loader: the word sequence and BIO tags both models are scored on.
+# src/schemas.py    Decimal-everywhere data contract.
+# src/tools.py      deterministic arithmetic; no model does maths in either project.
+# src/baseline.py   the 0.509 rules floor, same reference point.
+63e8b952e4e40578f5eb86dd003b5c8b737578eaa2cfe8d9a83f94119bcc09a5 *src/metrics.py
+16b516cb287dfaeaab9eeb36a85f5f0d4cb8ebb722174ea0e3f4a66de157b8f7 *src/data.py
+fae73d6f6e8b9bbe8cc2594015d7f5e2ca24b7ce9b36ba27f0b3c5afb3be03e3 *src/schemas.py
+9e613f2375e3a4e4ef4d32efcef1174c8feeff9dca17c8b50a79a65d56cd3f3f *src/tools.py
+b4a87e7ba41bedbcc168df21c2b56af361b517b20946b102848b71c5f21718de *src/baseline.py

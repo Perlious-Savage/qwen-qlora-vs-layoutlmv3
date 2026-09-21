@@ -1,0 +1,11 @@
+{
+  "dataset": "naver-clova-ix/cord-v2",
+  "model": "microsoft/layoutlmv3-base",
+  "test_precision": 0.9419743782969103,
+  "test_recall": 0.9549274255156608,
+  "test_f1": 0.9484066767830045,
+  "n_train": 800,
+  "n_test": 100,
+  "num_labels": 59,
+  "note": "Single training run. No confidence intervals, no repeated seeds."
+}

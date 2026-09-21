@@ -1,0 +1,2 @@
+# Byte-identical vendoring: never normalise line endings, the hashes depend on it.
+* -text

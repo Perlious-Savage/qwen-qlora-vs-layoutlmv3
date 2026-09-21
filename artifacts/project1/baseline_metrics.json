@@ -1,0 +1,10 @@
+{
+  "method": "keyword + position regex baseline (no model)",
+  "dataset": "naver-clova-ix/cord-v2",
+  "split": "test",
+  "n_documents": 100,
+  "test_precision": 0.5572727272727273,
+  "test_recall": 0.46829640947288004,
+  "test_f1": 0.5089248650892487,
+  "note": "Deterministic. No training, no GPU, no randomness - this number is exact."
+}

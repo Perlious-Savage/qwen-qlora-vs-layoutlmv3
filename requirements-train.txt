@@ -1,0 +1,10 @@
+# GPU only (Colab). Kept short on purpose: Colab already ships torch, and every extra
+# pinned package is another way the install can fail.
+transformers>=4.45
+datasets>=2.18
+peft>=0.13
+trl>=0.12
+bitsandbytes>=0.44
+accelerate
+Pillow
+mlflow

@@ -1,0 +1,3 @@
+# vLLM only. Separate file because it pulls its own torch build and takes minutes to
+# install; nothing except `bench.py --engine vllm` and MODEL_BACKEND=vllm needs it.
+vllm>=0.6
